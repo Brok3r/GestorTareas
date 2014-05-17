@@ -42,19 +42,30 @@ public class IniciarSesion extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        panel1.setColorPrimario(new java.awt.Color(8, 32, 87));
+        panel1.setColorSecundario(new java.awt.Color(22, 76, 135));
+        panel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/fondo.jpg"))); // NOI18N
+
         labelMetric1.setText("Usuario:");
+        labelMetric1.setIconTextGap(2);
 
         labelMetric2.setText("Contraseña:");
+        labelMetric2.setDistanciaDeSombra(2);
 
+        usuario.setBackground(new java.awt.Color(204, 204, 204));
         usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usuarioActionPerformed(evt);
             }
         });
 
+        registrar.setBackground(new java.awt.Color(0, 0, 0));
         registrar.setText("Registrar");
 
+        log.setBackground(new java.awt.Color(0, 0, 0));
         log.setText("Iniciar Sesión");
+
+        pass.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
