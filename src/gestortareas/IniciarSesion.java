@@ -47,6 +47,7 @@ public class IniciarSesion extends javax.swing.JDialog {
         panel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/fondo.jpg"))); // NOI18N
 
         labelMetric1.setText("Usuario:");
+        labelMetric1.setDistanciaDeSombra(2);
         labelMetric1.setIconTextGap(2);
 
         labelMetric2.setText("Contraseña:");

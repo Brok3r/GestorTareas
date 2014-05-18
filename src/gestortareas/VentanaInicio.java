@@ -33,6 +33,7 @@ public class VentanaInicio extends javax.swing.JFrame {
         desktop = new javax.swing.JDesktopPane();
         panel1 = new org.edisoncor.gui.panel.Panel();
         iniciarSesion = new javax.swing.JButton();
+        nuevaTarea = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -41,6 +42,7 @@ public class VentanaInicio extends javax.swing.JFrame {
 
         panel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/fondo.jpg"))); // NOI18N
 
+        iniciarSesion.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         iniciarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/1400377276_User.png"))); // NOI18N
         iniciarSesion.setText("Iniciar Sesion");
         iniciarSesion.setBorder(null);
@@ -49,21 +51,35 @@ public class VentanaInicio extends javax.swing.JFrame {
         iniciarSesion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         iniciarSesion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
+        nuevaTarea.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        nuevaTarea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/add.png"))); // NOI18N
+        nuevaTarea.setText("Nueva Tarea");
+        nuevaTarea.setBorder(null);
+        nuevaTarea.setBorderPainted(false);
+        nuevaTarea.setContentAreaFilled(false);
+        nuevaTarea.setFocusPainted(false);
+        nuevaTarea.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        nuevaTarea.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                .addContainerGap(792, Short.MAX_VALUE)
-                .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+            .addGroup(panel1Layout.createSequentialGroup()
+                .addGap(191, 191, 191)
+                .addComponent(nuevaTarea)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 726, Short.MAX_VALUE)
+                .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(iniciarSesion)
-                .addContainerGap(357, Short.MAX_VALUE))
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(nuevaTarea)
+                    .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(414, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
@@ -132,6 +148,7 @@ public class VentanaInicio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JDesktopPane desktop;
     public javax.swing.JButton iniciarSesion;
+    public javax.swing.JButton nuevaTarea;
     private org.edisoncor.gui.panel.Panel panel1;
     // End of variables declaration//GEN-END:variables
 }

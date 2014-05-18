@@ -121,7 +121,7 @@ public boolean instert(String tabla,  String valores){
     boolean res= false;
     // consulta
     String c=" INSERT INTO " +tabla +" VALUES ( "+ valores + " )";
-System.out.println(c);
+
        try {
            // Se ejecuta la consulta
            PreparedStatement pstm = con.prepareStatement(c);

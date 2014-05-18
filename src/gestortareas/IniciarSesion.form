@@ -101,6 +101,7 @@
         <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Usuario:"/>
+            <Property name="distanciaDeSombra" type="int" value="2"/>
             <Property name="iconTextGap" type="int" value="2"/>
           </Properties>
         </Component>

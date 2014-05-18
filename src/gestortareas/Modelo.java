@@ -48,13 +48,21 @@ public boolean loguear(String usuario, String pass){
           return false;
           
       }
-      
-
   
+public void insertarTarea(String usuario, String titulo,String descripcion, String prioridad, int progreso){
+    this.instert("TAREAS ", "01,"+usuario+","+titulo+","+descripcion+","+prioridad+","+progreso+",sysdate"); 
+    
+    
+}
   
-  
-  
-  
+//   insert into tareas
+//values(0000,'xisco','titulo', 'descripcion', 'alta','1',sysdate);
+// 
+// Para añadir +1 a el ultimo id, buscar por fecha
+//  select fecha from tareas
+//where fecha =(select  max(fecha) from tareas)
+//  
+//  
   
   
   
