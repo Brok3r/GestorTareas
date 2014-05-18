@@ -8,6 +8,7 @@ package Controlador;
 import Modelo.Modelo;
 import Vista.VentanaInicio;
 import Vista.IniciarSesion;
+import Vista.NuevaTarea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JInternalFrame;
@@ -23,6 +24,7 @@ public class Controlador implements ActionListener {
     private Modelo model;
 //form hijos
     IniciarSesion isesion;
+    NuevaTarea  nuevaTarea;
 
     public Controlador(VentanaInicio vista, Modelo modelo) {
         this.view = vista;
@@ -32,6 +34,7 @@ public class Controlador implements ActionListener {
     /* INICIA */
 
     private void iniciar() {
+        if(model.getConnectoin()!=null) view.conectado.setEnabled(true); else view.conectado.setEnabled(false); 
         view.setTitle("Gestor de Tareas");
         view.setExtendedState(VentanaInicio.MAXIMIZED_BOTH);
         //Se añade las acciones a los controles del formulario padre
@@ -41,7 +44,6 @@ public class Controlador implements ActionListener {
         //Se pone a escuchar las acciones del usuario
         view.iniciarSesion.addActionListener(this);
         view.nuevaTarea.addActionListener(this);
-
     }
 
  //___________________________________________________________________________________ Soy una barra separadora :)
@@ -67,15 +69,17 @@ public class Controlador implements ActionListener {
             if (model.loguear(isesion.usuario.getText(), isesion.pass.getText())) {
 
                 isesion.dispose(); //cierra el form
-
+                view.nuevaTarea.setEnabled(true);
+                view.iniciarSesion.setEnabled(false);
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario incorrecto, vuelva a intentarlo.", "Usuario incorrecto", JOptionPane.ERROR_MESSAGE);
             }
         }
         if (comando.equals("Nueva Tarea")) {
             formTarea();
+            
         }
-
+if(comando.equals("Cancelar")) nuevaTarea.dispose();
     }
 
  //METODO QUE DEVUELVE UN VALOR BOOLEAN PARA SABER SI UN JINTERNALFRAME ESTA ABIERTO O NO
@@ -103,18 +107,29 @@ public class Controlador implements ActionListener {
         isesion = new IniciarSesion();
         isesion.setTitle("Iniciar Sesion");
         isesion.setVisible(true);
-        isesion.setLocationRelativeTo(view);
+        isesion.setLocationRelativeTo(view); //centrado
 
         // Se añaden las accione sa los controles
         isesion.registrar.setActionCommand("Registrar");
         isesion.log.setActionCommand("Log");
-        //Se pone a escuchar
+      
         isesion.registrar.addActionListener(this);
         isesion.log.addActionListener(this);
     }
+    
+   //FORMULARIO NUEVA TAREA
     public void formTarea(){
-        
-        
+        nuevaTarea = new NuevaTarea();
+        nuevaTarea.setTitle("Nueva Tarea");
+        nuevaTarea.setVisible(true);
+        isesion.setLocationRelativeTo(view);
+        // Se añaden las accione sa los controles
+        nuevaTarea.aceptar.setActionCommand("Aceptar");
+        nuevaTarea.cancelar.setActionCommand("Cancelar");
+        //Se pone a escuchar
+        nuevaTarea.aceptar.addActionListener(this);
+        nuevaTarea.cancelar.addActionListener(this);
     }
+    
 
 }

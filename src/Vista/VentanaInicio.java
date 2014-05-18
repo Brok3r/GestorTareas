@@ -34,6 +34,8 @@ public class VentanaInicio extends javax.swing.JFrame {
         panel1 = new org.edisoncor.gui.panel.Panel();
         iniciarSesion = new javax.swing.JButton();
         nuevaTarea = new javax.swing.JButton();
+        conectado = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,6 +63,11 @@ public class VentanaInicio extends javax.swing.JFrame {
         nuevaTarea.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         nuevaTarea.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
+        conectado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/1400394282_accept-database.png"))); // NOI18N
+        conectado.setBorder(null);
+        conectado.setBorderPainted(false);
+        conectado.setContentAreaFilled(false);
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -68,9 +75,17 @@ public class VentanaInicio extends javax.swing.JFrame {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addGap(191, 191, 191)
                 .addComponent(nuevaTarea)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 726, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 997, Short.MAX_VALUE)
                 .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55))
+                .addGap(121, 121, 121))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(conectado, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator1))
+                .addGap(33, 33, 33))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -79,7 +94,11 @@ public class VentanaInicio extends javax.swing.JFrame {
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(nuevaTarea)
                     .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(414, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE)
+                .addGap(468, 468, 468)
+                .addComponent(conectado, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
@@ -146,8 +165,10 @@ public class VentanaInicio extends javax.swing.JFrame {
     
            
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton conectado;
     public javax.swing.JDesktopPane desktop;
     public javax.swing.JButton iniciarSesion;
+    private javax.swing.JSeparator jSeparator1;
     public javax.swing.JButton nuevaTarea;
     private org.edisoncor.gui.panel.Panel panel1;
     // End of variables declaration//GEN-END:variables
