@@ -4,22 +4,22 @@
  * and open the template in the editor.
  */
 
-package gestortareas;
+package Vista;
 
 /**
  *
  * @author Broker
  */
-public class IniciarSesion extends javax.swing.JDialog {
+public class NuevaTarea extends javax.swing.JDialog {
 
     /**
      * Creates new form logeo
      */
-    public IniciarSesion(java.awt.Frame parent, boolean modal) {
+    public NuevaTarea(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-    public IniciarSesion(){
+    public NuevaTarea(){
         initComponents();
     }
 
@@ -144,20 +144,20 @@ public class IniciarSesion extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IniciarSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevaTarea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IniciarSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevaTarea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IniciarSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevaTarea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(IniciarSesion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevaTarea.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                IniciarSesion dialog = new IniciarSesion(new javax.swing.JFrame(), true);
+                NuevaTarea dialog = new NuevaTarea(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

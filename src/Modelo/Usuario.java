@@ -1,5 +1,5 @@
 
-package gestortareas;
+package Modelo;
 
 /**
  *

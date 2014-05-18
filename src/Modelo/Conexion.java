@@ -1,6 +1,6 @@
 
 
-package gestortareas;
+package Modelo;
 // ERROR: java.sql.SQLException: ORA-00911: carácter no válido --> poner ";" al final de la sentencia
 
 import java.sql.Connection;

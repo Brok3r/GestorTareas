@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gestortareas;
+package Vista;
 
 import org.edisoncor.gui.panel.PanelAvatarChooser;
 

@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package gestortareas;
+package Modelo;
 
+import Modelo.Conexion;
 import javax.swing.JOptionPane;
 
 /**
