@@ -1,11 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Vista;
 
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.GridLayout;
+import javax.swing.BorderFactory;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.border.Border;
 import org.edisoncor.gui.panel.PanelAvatarChooser;
 
 /**
@@ -14,11 +15,33 @@ import org.edisoncor.gui.panel.PanelAvatarChooser;
  */
 public class VentanaInicio extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VentanaInicio
-     */
+    Border loweredbevel = BorderFactory.createLoweredBevelBorder();
+
     public VentanaInicio() {
+
         initComponents();
+
+    }
+                            
+    public void mostrarTareas() {
+      // Container contenedor = getContentPane();
+      // contenedor.add(panel, BorderLayout.CENTER);
+        text = new JTextPane[50];
+        
+
+        panel.setLayout(new GridLayout(text.length, 1));
+        for (int i = 0; i < text.length; i++) {
+            text[i] = new JTextPane();
+            text[i].setBorder(loweredbevel);
+            text[i].setSize(500, 400);
+            panel.add(text[i]);
+        }
+
+       
+
+        setVisible(true);
+        //mostrarTareas();
+
     }
 
     /**
@@ -36,6 +59,8 @@ public class VentanaInicio extends javax.swing.JFrame {
         nuevaTarea = new javax.swing.JButton();
         conectado = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        panel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,6 +93,21 @@ public class VentanaInicio extends javax.swing.JFrame {
         conectado.setBorderPainted(false);
         conectado.setContentAreaFilled(false);
 
+        panel.setBackground(new java.awt.Color(153, 255, 255));
+
+        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
+        panel.setLayout(panelLayout);
+        panelLayout.setHorizontalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 326, Short.MAX_VALUE)
+        );
+        panelLayout.setVerticalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 493, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(panel);
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -75,29 +115,36 @@ public class VentanaInicio extends javax.swing.JFrame {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addGap(191, 191, 191)
                 .addComponent(nuevaTarea)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 997, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 999, Short.MAX_VALUE)
                 .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(121, 121, 121))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator1)
+                .addGap(33, 33, 33))
+            .addGroup(panel1Layout.createSequentialGroup()
+                .addGap(511, 511, 511)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(conectado, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        panel1Layout.setVerticalGroup(
+            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(conectado, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jSeparator1))
-                .addGap(33, 33, 33))
-        );
-        panel1Layout.setVerticalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(nuevaTarea)
-                    .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE)
-                .addGap(468, 468, 468)
-                .addComponent(conectado, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(conectado, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nuevaTarea)
+                            .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1)))
                 .addContainerGap())
         );
 
@@ -105,7 +152,7 @@ public class VentanaInicio extends javax.swing.JFrame {
         desktop.setLayout(desktopLayout);
         desktopLayout.setHorizontalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         desktopLayout.setVerticalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,18 +205,23 @@ public class VentanaInicio extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VentanaInicio().setVisible(true);
-                
+
             }
         });
     }
-    
-           
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton conectado;
     public javax.swing.JDesktopPane desktop;
     public javax.swing.JButton iniciarSesion;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     public javax.swing.JButton nuevaTarea;
+    private javax.swing.JPanel panel;
     private org.edisoncor.gui.panel.Panel panel1;
     // End of variables declaration//GEN-END:variables
+    public JTextPane text[];
+    public JScrollPane scrollPane;
+
 }

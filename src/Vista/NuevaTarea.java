@@ -38,11 +38,11 @@ public class NuevaTarea extends javax.swing.JDialog {
         titulo = new org.edisoncor.gui.textField.TextField();
         cancelar = new org.edisoncor.gui.button.ButtonColoredAction();
         aceptar = new org.edisoncor.gui.button.ButtonColoredAction();
-        pass = new org.edisoncor.gui.passwordField.PasswordField();
         progreso = new javax.swing.JCheckBox();
         jProgressBar1 = new javax.swing.JProgressBar();
         prioridad = new javax.swing.JComboBox();
         labelMetric3 = new org.edisoncor.gui.label.LabelMetric();
+        descripcion = new org.edisoncor.gui.textField.TextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -71,15 +71,21 @@ public class NuevaTarea extends javax.swing.JDialog {
         aceptar.setBackground(new java.awt.Color(0, 0, 0));
         aceptar.setText("Aceptar");
 
-        pass.setBackground(new java.awt.Color(204, 204, 204));
-
         progreso.setText("En progreso");
         progreso.setContentAreaFilled(false);
 
         prioridad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Baja", "Media", "Alta" }));
+        prioridad.setToolTipText("");
 
         labelMetric3.setText("Prioridad");
         labelMetric3.setDistanciaDeSombra(2);
+
+        descripcion.setBackground(new java.awt.Color(204, 204, 204));
+        descripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                descripcionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -103,14 +109,14 @@ public class NuevaTarea extends javax.swing.JDialog {
                                     .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(progreso))))
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                                 .addGap(33, 33, 33)
+                                .addComponent(prioridad, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
                                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(pass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(prioridad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -128,7 +134,7 @@ public class NuevaTarea extends javax.swing.JDialog {
                 .addGap(23, 23, 23)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(prioridad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -163,6 +169,10 @@ public class NuevaTarea extends javax.swing.JDialog {
     private void tituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tituloActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tituloActionPerformed
+
+    private void descripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descripcionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_descripcionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,13 +219,13 @@ public class NuevaTarea extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public org.edisoncor.gui.button.ButtonColoredAction aceptar;
     public org.edisoncor.gui.button.ButtonColoredAction cancelar;
+    public org.edisoncor.gui.textField.TextField descripcion;
     private javax.swing.JProgressBar jProgressBar1;
     private org.edisoncor.gui.label.LabelMetric labelMetric1;
     private org.edisoncor.gui.label.LabelMetric labelMetric2;
     private org.edisoncor.gui.label.LabelMetric labelMetric3;
     private org.edisoncor.gui.panel.Panel panel1;
-    public org.edisoncor.gui.passwordField.PasswordField pass;
-    private javax.swing.JComboBox prioridad;
+    public javax.swing.JComboBox prioridad;
     public javax.swing.JCheckBox progreso;
     public org.edisoncor.gui.textField.TextField titulo;
     // End of variables declaration//GEN-END:variables

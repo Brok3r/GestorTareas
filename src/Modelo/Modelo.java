@@ -51,11 +51,23 @@ public boolean loguear(String usuario, String pass){
       }
   
 public void insertarTarea(String usuario, String titulo,String descripcion, String prioridad, int progreso){
-    this.instert("TAREAS ", "01,"+usuario+","+titulo+","+descripcion+","+prioridad+","+progreso+",sysdate"); 
+   
+    
+    instert("TAREAS ", +numeroTareas()+1+",'"+usuario+"','"+titulo+"','"+descripcion+"','"+prioridad+"',"+progreso+",sysdate"); 
     
     
 }
-  
+public int numeroTareas(){
+    Object[][] count=select("TAREAS","ID",null);
+    return count.length;
+}
+
+public void recuperarTareas(){
+    Object[][] tareas=select("TAREAS", "*", null);
+    
+    
+}
+
 //   insert into tareas
 //values(0000,'xisco','titulo', 'descripcion', 'alta','1',sysdate);
 // 

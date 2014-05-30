@@ -24,17 +24,22 @@ public class Controlador implements ActionListener {
     private Modelo model;
 //form hijos
     IniciarSesion isesion;
-    NuevaTarea  nuevaTarea;
+    NuevaTarea nuevaTarea;
 
     public Controlador(VentanaInicio vista, Modelo modelo) {
         this.view = vista;
         this.model = modelo;
         iniciar();
+        view.mostrarTareas();
     }
     /* INICIA */
 
     private void iniciar() {
-        if(model.getConnectoin()!=null) view.conectado.setEnabled(true); else view.conectado.setEnabled(false); 
+        if (model.getConnectoin() != null) {
+            view.conectado.setEnabled(true);
+        } else {
+            view.conectado.setEnabled(false);
+        }
         view.setTitle("Gestor de Tareas");
         view.setExtendedState(VentanaInicio.MAXIMIZED_BOTH);
         //Se añade las acciones a los controles del formulario padre
@@ -46,13 +51,13 @@ public class Controlador implements ActionListener {
         view.nuevaTarea.addActionListener(this);
     }
 
- //___________________________________________________________________________________ Soy una barra separadora :)
+    //___________________________________________________________________________________ Soy una barra separadora :)
 /* muestra la vista al usuario */
     public void go() {
         this.view.setVisible(true);
     }
 
-  //___________________________________________________________________________________ Soy una barra separadora :)
+    //___________________________________________________________________________________ Soy una barra separadora :)
     /* ATENTO A LAS ACCIONES DEL USUARIO */
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
@@ -74,15 +79,33 @@ public class Controlador implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario incorrecto, vuelva a intentarlo.", "Usuario incorrecto", JOptionPane.ERROR_MESSAGE);
             }
+
         }
         if (comando.equals("Nueva Tarea")) {
             formTarea();
-            
         }
-if(comando.equals("Cancelar")) nuevaTarea.dispose();
+        {
+            if (comando.equals("Aceptar")) {
+                int pri = 0;
+                int index = nuevaTarea.prioridad.getSelectedIndex();
+                if (nuevaTarea.progreso.isSelected()) {
+                    pri = 1;
+                }
+
+                model.insertarTarea(model.usuario.getUsuario(), nuevaTarea.titulo.getText(),
+                        nuevaTarea.descripcion.getText(), nuevaTarea.prioridad.getItemAt(index).toString(), pri);
+
+                nuevaTarea.dispose();
+            }
+
+            if (comando.equals("Cancelar")) {
+                nuevaTarea.dispose();
+            }
+        }
+
     }
 
- //METODO QUE DEVUELVE UN VALOR BOOLEAN PARA SABER SI UN JINTERNALFRAME ESTA ABIERTO O NO
+    //METODO QUE DEVUELVE UN VALOR BOOLEAN PARA SABER SI UN JINTERNALFRAME ESTA ABIERTO O NO
     private boolean estacerrado(Object obj) {
         JInternalFrame[] activos = this.view.desktop.getAllFrames();
         boolean cerrado = true;
@@ -104,6 +127,7 @@ if(comando.equals("Cancelar")) nuevaTarea.dispose();
     //______________________________
   /* FORMULARIO PARA INICIAR SESION*/
     public void form_sesion() {
+
         isesion = new IniciarSesion();
         isesion.setTitle("Iniciar Sesion");
         isesion.setVisible(true);
@@ -112,17 +136,17 @@ if(comando.equals("Cancelar")) nuevaTarea.dispose();
         // Se añaden las accione sa los controles
         isesion.registrar.setActionCommand("Registrar");
         isesion.log.setActionCommand("Log");
-      
+
         isesion.registrar.addActionListener(this);
         isesion.log.addActionListener(this);
     }
-    
-   //FORMULARIO NUEVA TAREA
-    public void formTarea(){
+
+    //FORMULARIO NUEVA TAREA
+    public void formTarea() {
         nuevaTarea = new NuevaTarea();
         nuevaTarea.setTitle("Nueva Tarea");
         nuevaTarea.setVisible(true);
-        isesion.setLocationRelativeTo(view);
+        nuevaTarea.setLocationRelativeTo(view);
         // Se añaden las accione sa los controles
         nuevaTarea.aceptar.setActionCommand("Aceptar");
         nuevaTarea.cancelar.setActionCommand("Cancelar");
@@ -130,6 +154,5 @@ if(comando.equals("Cancelar")) nuevaTarea.dispose();
         nuevaTarea.aceptar.addActionListener(this);
         nuevaTarea.cancelar.addActionListener(this);
     }
-    
 
 }

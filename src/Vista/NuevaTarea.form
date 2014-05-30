@@ -76,15 +76,15 @@
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Component id="titulo" min="-2" pref="159" max="-2" attributes="0"/>
-                              </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                                  <Component id="prioridad" min="-2" pref="157" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="pass" alignment="1" min="-2" pref="157" max="-2" attributes="0"/>
-                                      <Component id="prioridad" alignment="1" min="-2" pref="157" max="-2" attributes="0"/>
+                                      <Component id="descripcion" min="-2" pref="159" max="-2" attributes="0"/>
+                                      <Component id="titulo" min="-2" pref="159" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -111,7 +111,7 @@
                   <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="labelMetric2" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                      <Component id="pass" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="descripcion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
@@ -181,16 +181,6 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
         </Component>
-        <Component class="org.edisoncor.gui.passwordField.PasswordField" name="pass">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="cc" green="cc" red="cc" type="rgb"/>
-            </Property>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-          </AuxValues>
-        </Component>
         <Component class="javax.swing.JCheckBox" name="progreso">
           <Properties>
             <Property name="text" type="java.lang.String" value="En progreso"/>
@@ -211,13 +201,30 @@
                 <StringItem index="2" value="Alta"/>
               </StringArray>
             </Property>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
         <Component class="org.edisoncor.gui.label.LabelMetric" name="labelMetric3">
           <Properties>
             <Property name="text" type="java.lang.String" value="Prioridad"/>
             <Property name="distanciaDeSombra" type="int" value="2"/>
           </Properties>
+        </Component>
+        <Component class="org.edisoncor.gui.textField.TextField" name="descripcion">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="cc" red="cc" type="rgb"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="descripcionActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
