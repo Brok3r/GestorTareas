@@ -152,23 +152,14 @@ public void Update(String tabla, String valor, String columna, String condicion)
         } catch (SQLException e){System.out.print(e);}
     
 }
-
-
-
-
-
-
-
-
-
 /**
  *  Elimina filas de una tabla.
  * @param tabla Tabla que elegimos
  * @param condicion  Condicion del delete
  */
-public void eliminar(String tabla, String condicion){
-    String d=" DELETE FROM "+ tabla+
-            " where " +condicion;
+public void eliminar(String tabla){
+    String d=" DELETE FROM "+ tabla;
+         //   " where " +condicion;
     //se ejecuta la consulta
      try {
            // Se ejecuta la consulta
@@ -179,7 +170,25 @@ public void eliminar(String tabla, String condicion){
     
 }
 
-
+public String[] titCol(){
+    int registros=0;
+    try {  PreparedStatement pstm = con.prepareStatement("select * from tareas");
+    registros=pstm.getMetaData().getColumnCount();
+     
+    }catch (SQLException e){};
+     String[] titCol =new String[registros];
+    try {
+           PreparedStatement pstm = con.prepareStatement("select * from tareas");
+           for (int i = 0; i < pstm.getMetaData().getColumnCount(); i++) {
+	    titCol[i] = pstm.getMetaData().getColumnLabel(i + 1);                         
+     }
+     } catch (SQLException e){System.out.print(e);}
+   
+    
+    
+   return titCol;
+   
+}
 
 
 

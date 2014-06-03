@@ -56,26 +56,21 @@ public void insertarTarea(String usuario, String titulo,String descripcion, Stri
     instert("TAREAS ", +numeroTareas()+1+",'"+usuario+"','"+titulo+"','"+descripcion+"','"+prioridad+"',"+progreso+",sysdate"); 
     
     
-}
+}/**
+ *  
+ * @return Entero con el numero de tareas que hay
+ */
 public int numeroTareas(){
     Object[][] count=select("TAREAS","ID",null);
     return count.length;
 }
 
-public void recuperarTareas(){
-    Object[][] tareas=select("TAREAS", "*", null);
-    
+public Object[][] recuperarTareas(){
+    Object[][] tareas=select("TAREAS", "ID,USUARIO,TITULO,DESCRIPCION,PRIORIDAD,PROGRESO,FECHA ", null);
+    return tareas;
     
 }
 
-//   insert into tareas
-//values(0000,'xisco','titulo', 'descripcion', 'alta','1',sysdate);
-// 
-// Para añadir +1 a el ultimo id, buscar por fecha
-//  select fecha from tareas
-//where fecha =(select  max(fecha) from tareas)
-//  
-//  
   
   
   

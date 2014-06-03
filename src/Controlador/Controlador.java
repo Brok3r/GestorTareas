@@ -9,11 +9,13 @@ import Modelo.Modelo;
 import Vista.VentanaInicio;
 import Vista.IniciarSesion;
 import Vista.NuevaTarea;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
-
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 /**
  *
  * @author dam1a_10
@@ -23,14 +25,61 @@ public class Controlador implements ActionListener {
     private VentanaInicio view;
     private Modelo model;
 //form hijos
+    
     IniciarSesion isesion;
     NuevaTarea nuevaTarea;
+    public Controlador(){}
+    MouseListener ml=new MouseListener() {
+    
+        @Override
+        public void mouseClicked(MouseEvent e) {
+           
+        }
 
+        @Override
+        public void mousePressed(MouseEvent e) {
+         
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+            
+        }
+
+        
+         public   MouseListener getMouseListener(){    
+            return ml;
+        }
+        @Override
+        public void mouseEntered(MouseEvent e) {        
+        for(int i=0; i< view.text.length; i++){    
+            if(e.getSource().equals(view.text[i])){
+                view.text[i].setBackground(Color.red);
+                
+            }
+        }
+          
+        
+    }
+            
+     @Override
+        public void mouseExited(MouseEvent e) {
+            for(int i=0; i< view.text.length; i++){    
+            if(e.getSource().equals(view.text[i])){
+                view.text[i].setBackground(Color.BLUE);
+                
+            }
+        }
+        }
+    };
     public Controlador(VentanaInicio vista, Modelo modelo) {
         this.view = vista;
         this.model = modelo;
         iniciar();
-        view.mostrarTareas();
+        view.mostrarTareas(model.numeroTareas(),model.recuperarTareas());
+        for(int i=0; i< view.text.length; i++){
+            view.text[i].addMouseListener(ml);
+        }
     }
     /* INICIA */
 
@@ -46,9 +95,17 @@ public class Controlador implements ActionListener {
         this.view.iniciarSesion.setActionCommand("Iniciar Sesion");
         view.nuevaTarea.setActionCommand("Nueva Tarea");
         view.nuevaTarea.setEnabled(false);
+        view.actualizar.setActionCommand("Actualizar"); 
+        view.eliminar.setActionCommand("Eliminar");
         //Se pone a escuchar las acciones del usuario
         view.iniciarSesion.addActionListener(this);
         view.nuevaTarea.addActionListener(this);
+        view.actualizar.addActionListener(this);
+        view.eliminar.addActionListener(this);
+        
+        //Mouese Listener
+        view.panel.addMouseListener(ml);
+        
     }
 
     //___________________________________________________________________________________ Soy una barra separadora :)
@@ -59,12 +116,26 @@ public class Controlador implements ActionListener {
 
     //___________________________________________________________________________________ Soy una barra separadora :)
     /* ATENTO A LAS ACCIONES DEL USUARIO */
+
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
-
+                
         if (comando.equals("Iniciar Sesion")) {
-            form_sesion();
+            formSesion();
         }
+        if(comando.equals("Actualizar")){
+            view.mostrarTareas(model.numeroTareas(), model.recuperarTareas());
+          for(int i=0; i< view.text.length; i++){
+            view.text[i].addMouseListener(ml);
+        }
+        }
+        if(comando.equals("Eliminar")){
+            
+            
+        }
+            
+        
+        
 
         if (comando.equals("Registrar")) {
 
@@ -126,7 +197,7 @@ public class Controlador implements ActionListener {
      */
     //______________________________
   /* FORMULARIO PARA INICIAR SESION*/
-    public void form_sesion() {
+    public void formSesion() {
 
         isesion = new IniciarSesion();
         isesion.setTitle("Iniciar Sesion");
@@ -141,7 +212,8 @@ public class Controlador implements ActionListener {
         isesion.log.addActionListener(this);
     }
 
-    //FORMULARIO NUEVA TAREA
+
+//FORMULARIO NUEVA TAREA
     public void formTarea() {
         nuevaTarea = new NuevaTarea();
         nuevaTarea.setTitle("Nueva Tarea");

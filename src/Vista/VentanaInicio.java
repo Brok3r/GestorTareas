@@ -1,5 +1,6 @@
 package Vista;
 
+import Controlador.Controlador;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
@@ -8,33 +9,77 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.border.Border;
 import org.edisoncor.gui.panel.PanelAvatarChooser;
-
+import java.awt.Dimension;
+import static org.edisoncor.gui.util.BlendComposite.Color;
+import java.awt.Color;
 /**
  *
  * @author Broker
  */
+
 public class VentanaInicio extends javax.swing.JFrame {
 
     Border loweredbevel = BorderFactory.createLoweredBevelBorder();
-
+    Controlador cont = new Controlador();
     public VentanaInicio() {
 
         initComponents();
-
+    
     }
                             
-    public void mostrarTareas() {
-      // Container contenedor = getContentPane();
-      // contenedor.add(panel, BorderLayout.CENTER);
-        text = new JTextPane[50];
+    public void mostrarTareas(int numero_tareas, Object[][] tareas) {
+        panel.removeAll();
+        
+        Dimension d = new Dimension();
+        d.setSize(300, 200);
+        Color c=new Color(200, 100,50);
+        
+        text = new JTextPane[numero_tareas];
         
 
-        panel.setLayout(new GridLayout(text.length, 1));
+        panel.setLayout(new GridLayout(300, 1));
         for (int i = 0; i < text.length; i++) {
             text[i] = new JTextPane();
-            text[i].setBorder(loweredbevel);
-            text[i].setSize(500, 400);
+            text[i].setSize(d);
+            text[i].setEditable(false);
+            text[i].setFocusable(true);
+            //text[i].addMouseListener(cont.get);
+            //text[i].setBorder(loweredbevel);
+            text[i].setContentType("text/html");
+            text[i].setText(
+                    
+                    ""
+                            + "<!DOCTYPE html>\n" +
+"\n" +
+"<html >\n" +
+"<head>"
+                            + "<style>"
+                            + "p:hover{\n" +
+"	background-color:yellow;" +
+"}"
+ + "body:hover{"
+                            + "background-color:#FFFFFF; text-decoration:underline; font-weight:bold"
+  + "}\n" +
+"h1\n" +
+"{\n" +
+"color:orange;\n" +
+"text-align:center;\n" +
+"}\n" +
+"p\n" +
+                            
+"{\n" +
+"font-family:\"Times New Roman\";\n" +
+"font-size:20px;\n" +
+"}</style> </head><body>  <h1>"+tareas[i][1]+"</h1>"+
+                    "<h2>"+tareas[i][2]+"</h2>"+
+                    "<p>Descripción: "+tareas[i][3]+"</p>"+
+                    "Prioridad: <h3>"+tareas[i][4]+"</h3>"
++"</body></html>"
+                    );
+            text[i].setSize(300, 200);
             panel.add(text[i]);
+            text[i].setBackground(c);
+            
         }
 
        
@@ -61,6 +106,8 @@ public class VentanaInicio extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         panel = new javax.swing.JPanel();
+        actualizar = new javax.swing.JButton();
+        eliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,7 +116,6 @@ public class VentanaInicio extends javax.swing.JFrame {
 
         panel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/fondo.jpg"))); // NOI18N
 
-        iniciarSesion.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         iniciarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/1400377276_User.png"))); // NOI18N
         iniciarSesion.setText("Iniciar Sesion");
         iniciarSesion.setBorder(null);
@@ -78,9 +124,9 @@ public class VentanaInicio extends javax.swing.JFrame {
         iniciarSesion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         iniciarSesion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        nuevaTarea.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         nuevaTarea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/add.png"))); // NOI18N
         nuevaTarea.setText("Nueva Tarea");
+        nuevaTarea.setToolTipText("Añande nuevas tareas.");
         nuevaTarea.setBorder(null);
         nuevaTarea.setBorderPainted(false);
         nuevaTarea.setContentAreaFilled(false);
@@ -93,13 +139,13 @@ public class VentanaInicio extends javax.swing.JFrame {
         conectado.setBorderPainted(false);
         conectado.setContentAreaFilled(false);
 
-        panel.setBackground(new java.awt.Color(153, 255, 255));
+        panel.setBackground(new java.awt.Color(204, 204, 204));
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 326, Short.MAX_VALUE)
+            .addGap(0, 602, Short.MAX_VALUE)
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,6 +154,24 @@ public class VentanaInicio extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(panel);
 
+        actualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/Synchronize.png"))); // NOI18N
+        actualizar.setText("Actualizar");
+        actualizar.setToolTipText("Actualiza la linea de tiempo de tareas.");
+        actualizar.setBorder(null);
+        actualizar.setBorderPainted(false);
+        actualizar.setContentAreaFilled(false);
+        actualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        actualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/minus.png"))); // NOI18N
+        eliminar.setText("Eliminar Tarea");
+        eliminar.setToolTipText("Elimina Tareas.");
+        eliminar.setBorder(null);
+        eliminar.setBorderPainted(false);
+        eliminar.setContentAreaFilled(false);
+        eliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        eliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -115,7 +179,11 @@ public class VentanaInicio extends javax.swing.JFrame {
             .addGroup(panel1Layout.createSequentialGroup()
                 .addGap(191, 191, 191)
                 .addComponent(nuevaTarea)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 999, Short.MAX_VALUE)
+                .addGap(38, 38, 38)
+                .addComponent(eliminar)
+                .addGap(288, 288, 288)
+                .addComponent(actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 544, Short.MAX_VALUE)
                 .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(121, 121, 121))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
@@ -123,9 +191,9 @@ public class VentanaInicio extends javax.swing.JFrame {
                 .addComponent(jSeparator1)
                 .addGap(33, 33, 33))
             .addGroup(panel1Layout.createSequentialGroup()
-                .addGap(511, 511, 511)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(253, 253, 253)
                 .addComponent(conectado, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -139,12 +207,18 @@ public class VentanaInicio extends javax.swing.JFrame {
                         .addComponent(conectado, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(nuevaTarea)
-                            .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(nuevaTarea)
+                                    .addComponent(actualizar))
+                                .addGap(2, 2, 2)))
+                        .addGap(16, 16, 16)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)
+                        .addGap(12, 12, 12)))
                 .addContainerGap())
         );
 
@@ -212,14 +286,16 @@ public class VentanaInicio extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton actualizar;
     public javax.swing.JButton conectado;
     public javax.swing.JDesktopPane desktop;
+    public javax.swing.JButton eliminar;
     public javax.swing.JButton iniciarSesion;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     public javax.swing.JButton nuevaTarea;
-    private javax.swing.JPanel panel;
-    private org.edisoncor.gui.panel.Panel panel1;
+    public javax.swing.JPanel panel;
+    public org.edisoncor.gui.panel.Panel panel1;
     // End of variables declaration//GEN-END:variables
     public JTextPane text[];
     public JScrollPane scrollPane;
