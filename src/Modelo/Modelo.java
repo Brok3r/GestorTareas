@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 public class Modelo extends Conexion {
 
     public Usuario usuario = new Usuario();
+    public Tareas tareas = new Tareas();
 
     public Modelo() {
     }
@@ -60,6 +61,11 @@ public class Modelo extends Conexion {
         Object[][] count = select("TAREAS", "ID", null, null);
         return count.length;
     }
+    
+    
+     public int numeroTareas(Object[][] tareas) {
+             return tareas.length;
+    }
 /**
  * 
  * @return Entero. El número mas grande de id, para poder hacer un insert
@@ -74,14 +80,37 @@ public class Modelo extends Conexion {
         }
     }
 
+    
+    
+/**
+ * Hace un select de la tabla Tareas y devuelve el resultado en una matriz de objetos
+ * @param orderBy orden 
+ * @return Object[][]
+ */
     public Object[][] recuperarTareas(String orderBy) {
         Object[][] tareas = select("TAREAS", "ID,USUARIO,TITULO,DESCRIPCION,PRIORIDAD,PROGRESO,FECHA ", null, orderBy);
         return tareas;
 
     }
-
+/** 
+ * Hace un select de la tabla Tareas y devuelve el resultado en una matriz de objetos
+ * @return  Object[][]
+ */
     public Object[][] recuperarTareas() {
         Object[][] tareas = select("TAREAS", "ID,USUARIO,TITULO,DESCRIPCION,PRIORIDAD,PROGRESO,FECHA ", null, null);
+        return tareas;
+
+    }
+    
+    
+    /**
+     * Hace un select de la tabla Tareas y devuelve el resultado en una matriz de objetos
+     * @param where condicion
+     * @param orderBy orden
+     * @return  Una matriz con la conuslta
+     */
+      public Object[][] recuperarTareas(String where,String orderBy) {
+        Object[][] tareas = select("TAREAS", "ID,USUARIO,TITULO,DESCRIPCION,PRIORIDAD,PROGRESO,FECHA ", where, orderBy);
         return tareas;
 
     }

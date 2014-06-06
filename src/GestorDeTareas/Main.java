@@ -1,9 +1,5 @@
 package GestorDeTareas;
 
-
-
-
-
 import Controlador.Controlador;
 import Modelo.Modelo;
 import Vista.VentanaInicio;

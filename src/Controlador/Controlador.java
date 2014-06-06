@@ -80,10 +80,9 @@ public class Controlador implements ActionListener {
         this.view = vista;
         this.model = modelo;
         iniciar();
-        view.mostrarTareas(model.numeroTareas(), model.recuperarTareas());
-        for (int i = 0; i < view.text.length; i++) {
-            view.text[i].addMouseListener(ml);
-        }
+        añadirListeners();
+  
+        
     }
     /* INICIA */
 
@@ -102,30 +101,37 @@ public class Controlador implements ActionListener {
         view.actualizar.setActionCommand("Actualizar");
         view.eliminar.setActionCommand("Eliminar");
         view.ordenar.setActionCommand("Ordenar");
+        view.filtrar.setActionCommand("Filtrar");
         //Se pone a escuchar las acciones del usuario
         view.iniciarSesion.addActionListener(this);
         view.nuevaTarea.addActionListener(this);
         view.actualizar.addActionListener(this);
         view.eliminar.addActionListener(this);
         view.ordenar.addActionListener(this);
-
+        view.filtrar.addActionListener(this);
         //Mouese Listener
         view.panel.addMouseListener(ml);
 
     }
 
-    //___________________________________________________________________________________ Soy una barra separadora :)
+    //___________________________________________________________________________________ 
 /* muestra la vista al usuario */
     public void go() {
         this.view.setVisible(true);
     }
 
-    //___________________________________________________________________________________ Soy una barra separadora :)
+    //___________________________________________________________________________________ 
     /* ATENTO A LAS ACCIONES DEL USUARIO */
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
       
-       
+        if(comando.equals("Filtrar")){
+                
+            
+            view.mostrarTareas(model.numeroTareas(model.recuperarTareas(" usuario='"+model.usuario.getUsuario()+"'", null)),model.recuperarTareas(" usuario='"+model.usuario.getUsuario()+"'", null));
+            añadirListeners();
+        }
+        
         if (comando.equals("Iniciar Sesion")) {
             formSesion();
         }
@@ -134,10 +140,8 @@ public class Controlador implements ActionListener {
             if(index!=0){
 view.mostrarTareas(model.numeroTareas(), model.recuperarTareas(view.ordenar.getItemAt(index).toString()));
             }
-            view.mostrarTareas(model.numeroTareas(), model.recuperarTareas());
-            for (int i = 0; i < view.text.length; i++) {
-                view.text[i].addMouseListener(ml);
-            }
+            añadirListeners();
+            
         }
         if (comando.equals("Eliminar")) {
             view.nuevaTarea.setEnabled(false);
@@ -232,5 +236,28 @@ view.mostrarTareas(model.numeroTareas(), model.recuperarTareas(view.ordenar.getI
         nuevaTarea.aceptar.addActionListener(this);
         nuevaTarea.cancelar.addActionListener(this);
     }
+    
+    
+    
+    
+    
+    
+    
+    
+        public void añadirListeners(){
+    view.mostrarTareas(model.numeroTareas(), model.recuperarTareas());
+        for (int i = 0; i < view.text.length; i++) {
+            view.text[i].addMouseListener(ml);
+}
+        }
+    
+    
+    public void añadirListeners(Object [][] tareas){
+    view.mostrarTareas(model.numeroTareas(tareas), tareas);
+        for (int i = 0; i < view.text.length; i++) {
+            view.text[i].addMouseListener(ml);
+}
+}
+    
 
 }
