@@ -12,6 +12,8 @@ import org.edisoncor.gui.panel.PanelAvatarChooser;
 import java.awt.Dimension;
 import static org.edisoncor.gui.util.BlendComposite.Color;
 import java.awt.Color;
+import javax.swing.JProgressBar;
+import javax.swing.JSeparator;
 /**
  *
  * @author Broker
@@ -21,6 +23,8 @@ public class VentanaInicio extends javax.swing.JFrame {
 
     Border loweredbevel = BorderFactory.createLoweredBevelBorder();
     Controlador cont = new Controlador();
+  
+
     public VentanaInicio() {
 
         initComponents();
@@ -30,22 +34,39 @@ public class VentanaInicio extends javax.swing.JFrame {
     public void mostrarTareas(int numero_tareas, Object[][] tareas) {
         panel.removeAll();
         
-        Dimension d = new Dimension();
-        d.setSize(300, 200);
+        Dimension dimensionTaraea = new Dimension();
+        Dimension dimensionProgreso = new Dimension();
+        dimensionProgreso.setSize(200,25);
+        dimensionTaraea.setSize(300, 200);
         Color c=new Color(200, 100,50);
         
         text = new JTextPane[numero_tareas];
+        barra = new JProgressBar[numero_tareas];
+ 
         
-
         panel.setLayout(new GridLayout(300, 1));
         for (int i = 0; i < text.length; i++) {
             text[i] = new JTextPane();
-            text[i].setSize(d);
+            barra[i] = new JProgressBar();
+
+            barra[i].setSize(dimensionProgreso);
+            barra[i].setLocation(300, 150);
+
+            text[i].setSize(dimensionTaraea);
             text[i].setEditable(false);
             text[i].setFocusable(true);
-            //text[i].addMouseListener(cont.get);
-            //text[i].setBorder(loweredbevel);
+            text[i].setName((String)tareas[i][0]);
+            text[i].setBorder(loweredbevel);
             text[i].setContentType("text/html");
+            text[i].add(barra[i]);
+            int progreso=Integer.parseInt((String) tareas[i][5]);
+            barra[i].setValue(progreso);
+//            if((int)tareas[i][5]<25)  barra[i].setBackground(c);
+//            else if((int)tareas[i][5]<=25)  barra[i].setBackground(c);
+//            else if((int)tareas[i][5]<=50)  barra[i].setBackground(c);
+//            else if((int)tareas[i][5]<=75)  barra[i].setBackground(c);
+//            else if((int)tareas[i][5]<=75)  barra[i].setBackground(c);
+            barra[i].setVisible(true);
             text[i].setText(
                     
                     ""
@@ -74,11 +95,12 @@ public class VentanaInicio extends javax.swing.JFrame {
                     "<h2>"+tareas[i][2]+"</h2>"+
                     "<p>Descripción: "+tareas[i][3]+"</p>"+
                     "Prioridad: <h3>"+tareas[i][4]+"</h3>"
+                     +"Fecha: "+tareas[i][6]       
 +"</body></html>"
                     );
             text[i].setSize(300, 200);
             panel.add(text[i]);
-            text[i].setBackground(c);
+            text[i].setOpaque(true);
             
         }
 
@@ -108,8 +130,11 @@ public class VentanaInicio extends javax.swing.JFrame {
         panel = new javax.swing.JPanel();
         actualizar = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        ordenar = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gestor de Tareas");
 
         desktop.setBackground(new java.awt.Color(255, 255, 255));
         desktop.setMaximumSize(new java.awt.Dimension(999999999, 999999999));
@@ -172,6 +197,10 @@ public class VentanaInicio extends javax.swing.JFrame {
         eliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         eliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
+        jLabel1.setText("Ordenar por:");
+
+        ordenar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "fecha", "prioridad" }));
+
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
         panel1Layout.setHorizontalGroup(
@@ -191,7 +220,11 @@ public class VentanaInicio extends javax.swing.JFrame {
                 .addComponent(jSeparator1)
                 .addGap(33, 33, 33))
             .addGroup(panel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(88, 88, 88)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ordenar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 625, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(253, 253, 253)
                 .addComponent(conectado, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -217,8 +250,15 @@ public class VentanaInicio extends javax.swing.JFrame {
                         .addGap(16, 16, 16)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)
-                        .addGap(12, 12, 12)))
+                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE)
+                                .addGap(12, 12, 12))
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(ordenar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
 
@@ -291,13 +331,16 @@ public class VentanaInicio extends javax.swing.JFrame {
     public javax.swing.JDesktopPane desktop;
     public javax.swing.JButton eliminar;
     public javax.swing.JButton iniciarSesion;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     public javax.swing.JButton nuevaTarea;
+    public javax.swing.JComboBox ordenar;
     public javax.swing.JPanel panel;
     public org.edisoncor.gui.panel.Panel panel1;
     // End of variables declaration//GEN-END:variables
     public JTextPane text[];
     public JScrollPane scrollPane;
+    public JProgressBar barra[];
 
 }

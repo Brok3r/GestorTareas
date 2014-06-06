@@ -20,7 +20,7 @@ public class Conexion {
    private String bd ="fbmoll";
    private String login= "alumne";
    private String pass= "alumne";
-   private String url= "jdbc:oracle:thin:@172.16.6.90:1521:"+bd;
+   private String url= "jdbc:oracle:thin:@192.168.1.7:1521:"+bd;
    private Connection con = null;
 //______________________________________________________________________
    
@@ -68,7 +68,7 @@ public Connection getConnectoin(){
  * @param where condición de la consulta
  * @return un object[][] con los datos resultantes, sino retorna null
  */
-public   Object[][] select (String tabla, String campos,String where ){
+public   Object[][] select (String tabla, String campos,String where,String orderBy ){
     int  registros = 0;
     String colname[]= campos.split(","); 
     
@@ -80,6 +80,10 @@ public   Object[][] select (String tabla, String campos,String where ){
     if(where!=null){
         c+=" WHERE " + where;
         c2+=" WHERE " + where;
+    }
+      if(orderBy!=null){
+        c+=" order by " +  orderBy;
+        
     }
     try{
        
@@ -157,9 +161,8 @@ public void Update(String tabla, String valor, String columna, String condicion)
  * @param tabla Tabla que elegimos
  * @param condicion  Condicion del delete
  */
-public void eliminar(String tabla){
-    String d=" DELETE FROM "+ tabla;
-         //   " where " +condicion;
+public void delete(String tabla,String condicion){
+    String d=" DELETE FROM "+ tabla+ " where  " +condicion;
     //se ejecuta la consulta
      try {
            // Se ejecuta la consulta
@@ -169,6 +172,7 @@ public void eliminar(String tabla){
         } catch (SQLException e){System.out.print(e);}
     
 }
+
 
 public String[] titCol(){
     int registros=0;

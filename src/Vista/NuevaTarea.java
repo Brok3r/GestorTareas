@@ -38,11 +38,12 @@ public class NuevaTarea extends javax.swing.JDialog {
         titulo = new org.edisoncor.gui.textField.TextField();
         cancelar = new org.edisoncor.gui.button.ButtonColoredAction();
         aceptar = new org.edisoncor.gui.button.ButtonColoredAction();
-        progreso = new javax.swing.JCheckBox();
         jProgressBar1 = new javax.swing.JProgressBar();
         prioridad = new javax.swing.JComboBox();
         labelMetric3 = new org.edisoncor.gui.label.LabelMetric();
         descripcion = new org.edisoncor.gui.textField.TextField();
+        labelMetric4 = new org.edisoncor.gui.label.LabelMetric();
+        progreso = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -71,9 +72,6 @@ public class NuevaTarea extends javax.swing.JDialog {
         aceptar.setBackground(new java.awt.Color(0, 0, 0));
         aceptar.setText("Aceptar");
 
-        progreso.setText("En progreso");
-        progreso.setContentAreaFilled(false);
-
         prioridad.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Baja", "Media", "Alta" }));
         prioridad.setToolTipText("");
 
@@ -86,6 +84,11 @@ public class NuevaTarea extends javax.swing.JDialog {
                 descripcionActionPerformed(evt);
             }
         });
+
+        labelMetric4.setText("Progreso:");
+        labelMetric4.setDistanciaDeSombra(2);
+
+        progreso.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), null, Integer.valueOf(100), Integer.valueOf(5)));
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -103,11 +106,11 @@ public class NuevaTarea extends javax.swing.JDialog {
                                 .addGap(35, 35, 35)
                                 .addComponent(labelMetric1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(33, 33, 33)
+                                .addGap(35, 35, 35)
                                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(labelMetric2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(progreso))))
+                                    .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
                                 .addGap(33, 33, 33)
@@ -116,7 +119,10 @@ public class NuevaTarea extends javax.swing.JDialog {
                                 .addGap(31, 31, 31)
                                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(descripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(titulo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addComponent(progreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -139,9 +145,11 @@ public class NuevaTarea extends javax.swing.JDialog {
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(prioridad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelMetric3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addComponent(progreso)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelMetric4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(progreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -224,9 +232,10 @@ public class NuevaTarea extends javax.swing.JDialog {
     private org.edisoncor.gui.label.LabelMetric labelMetric1;
     private org.edisoncor.gui.label.LabelMetric labelMetric2;
     private org.edisoncor.gui.label.LabelMetric labelMetric3;
+    private org.edisoncor.gui.label.LabelMetric labelMetric4;
     private org.edisoncor.gui.panel.Panel panel1;
     public javax.swing.JComboBox prioridad;
-    public javax.swing.JCheckBox progreso;
+    public javax.swing.JSpinner progreso;
     public org.edisoncor.gui.textField.TextField titulo;
     // End of variables declaration//GEN-END:variables
 }

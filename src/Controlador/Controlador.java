@@ -16,6 +16,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 /**
  *
  * @author dam1a_10
@@ -25,59 +26,62 @@ public class Controlador implements ActionListener {
     private VentanaInicio view;
     private Modelo model;
 //form hijos
-    
+
     IniciarSesion isesion;
     NuevaTarea nuevaTarea;
-    public Controlador(){}
-    MouseListener ml=new MouseListener() {
-    
-        @Override
-        public void mouseClicked(MouseEvent e) {
-           
-        }
 
-        @Override
-        public void mousePressed(MouseEvent e) {
-         
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-            
-        }
-
-        
-         public   MouseListener getMouseListener(){    
-            return ml;
-        }
-        @Override
-        public void mouseEntered(MouseEvent e) {        
-        for(int i=0; i< view.text.length; i++){    
-            if(e.getSource().equals(view.text[i])){
-                view.text[i].setBackground(Color.red);
-                
-            }
-        }
-          
-        
+    public Controlador() {
     }
+    MouseListener ml = new MouseListener() {
+
+        public void mouseClicked(MouseEvent e) {
             
-     @Override
-        public void mouseExited(MouseEvent e) {
-            for(int i=0; i< view.text.length; i++){    
-            if(e.getSource().equals(view.text[i])){
-                view.text[i].setBackground(Color.BLUE);
-                
+            if (!view.nuevaTarea.isEnabled()) { //el boton "eliminar" pone el resto de boton en disable, así controlamos si se ha pulsado el boton elimninar.
+            for (int i = 0; i < view.text.length; i++) {      
+                if (e.getSource().equals(view.text[i])) {
+
+                    int seleccion = JOptionPane.showOptionDialog(null, "¿Desea eliminar esta tarea?", //Mensaje
+                            "Eliminar Tarea", // Título
+                            JOptionPane.YES_NO_CANCEL_OPTION,
+                            JOptionPane.QUESTION_MESSAGE,
+                            null, // null para icono por defecto.
+                            new Object[]{"Si", "No"}, // null para YES, NO y CANCEL
+                            "Si");
+                    if (seleccion == 0) { 
+                        model.delete("tareas ", "id="+view.text[i].getName());
+                        
+                         }
+                        
+           view.nuevaTarea.setEnabled(true);
+            view.actualizar.setEnabled(true);}
+            }
             }
         }
+        public void mousePressed(MouseEvent e) {  }      @Override
+        public void mouseReleased(MouseEvent e) {}
+        public void mouseEntered(MouseEvent e) {
+            for (int i = 0; i < view.text.length; i++) {
+                if (e.getSource().equals(view.text[i])) {
+                    view.text[i].setBackground(Color.LIGHT_GRAY);
+                }
+            }
+        }
+        @Override
+        public void mouseExited(MouseEvent e) {
+            for (int i = 0; i < view.text.length; i++) {
+                if (e.getSource().equals(view.text[i])) {
+                    view.text[i].setBackground(Color.DARK_GRAY);
+                }
+            }
         }
     };
+
     public Controlador(VentanaInicio vista, Modelo modelo) {
         this.view = vista;
         this.model = modelo;
         iniciar();
-        view.mostrarTareas(model.numeroTareas(),model.recuperarTareas());
-        for(int i=0; i< view.text.length; i++){
+        view.mostrarTareas(model.numeroTareas(), model.recuperarTareas());
+        for (int i = 0; i < view.text.length; i++) {
             view.text[i].addMouseListener(ml);
         }
     }
@@ -95,17 +99,19 @@ public class Controlador implements ActionListener {
         this.view.iniciarSesion.setActionCommand("Iniciar Sesion");
         view.nuevaTarea.setActionCommand("Nueva Tarea");
         view.nuevaTarea.setEnabled(false);
-        view.actualizar.setActionCommand("Actualizar"); 
+        view.actualizar.setActionCommand("Actualizar");
         view.eliminar.setActionCommand("Eliminar");
+        view.ordenar.setActionCommand("Ordenar");
         //Se pone a escuchar las acciones del usuario
         view.iniciarSesion.addActionListener(this);
         view.nuevaTarea.addActionListener(this);
         view.actualizar.addActionListener(this);
         view.eliminar.addActionListener(this);
-        
+        view.ordenar.addActionListener(this);
+
         //Mouese Listener
         view.panel.addMouseListener(ml);
-        
+
     }
 
     //___________________________________________________________________________________ Soy una barra separadora :)
@@ -116,26 +122,29 @@ public class Controlador implements ActionListener {
 
     //___________________________________________________________________________________ Soy una barra separadora :)
     /* ATENTO A LAS ACCIONES DEL USUARIO */
-
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
-                
+      
+       
         if (comando.equals("Iniciar Sesion")) {
             formSesion();
         }
-        if(comando.equals("Actualizar")){
+        if (comando.equals("Actualizar")) {
+            int index=view.ordenar.getSelectedIndex();
+            if(index!=0){
+view.mostrarTareas(model.numeroTareas(), model.recuperarTareas(view.ordenar.getItemAt(index).toString()));
+            }
             view.mostrarTareas(model.numeroTareas(), model.recuperarTareas());
-          for(int i=0; i< view.text.length; i++){
-            view.text[i].addMouseListener(ml);
+            for (int i = 0; i < view.text.length; i++) {
+                view.text[i].addMouseListener(ml);
+            }
         }
+        if (comando.equals("Eliminar")) {
+            view.nuevaTarea.setEnabled(false);
+            view.actualizar.setEnabled(false);
+            
+
         }
-        if(comando.equals("Eliminar")){
-            
-            
-        }
-            
-        
-        
 
         if (comando.equals("Registrar")) {
 
@@ -157,14 +166,12 @@ public class Controlador implements ActionListener {
         }
         {
             if (comando.equals("Aceptar")) {
-                int pri = 0;
-                int index = nuevaTarea.prioridad.getSelectedIndex();
-                if (nuevaTarea.progreso.isSelected()) {
-                    pri = 1;
-                }
-
+              
+                int index = nuevaTarea.prioridad.getSelectedIndex();            
+                
+              
                 model.insertarTarea(model.usuario.getUsuario(), nuevaTarea.titulo.getText(),
-                        nuevaTarea.descripcion.getText(), nuevaTarea.prioridad.getItemAt(index).toString(), pri);
+                        nuevaTarea.descripcion.getText(), nuevaTarea.prioridad.getItemAt(index).toString(), (int) nuevaTarea.progreso.getValue());
 
                 nuevaTarea.dispose();
             }
@@ -211,7 +218,6 @@ public class Controlador implements ActionListener {
         isesion.registrar.addActionListener(this);
         isesion.log.addActionListener(this);
     }
-
 
 //FORMULARIO NUEVA TAREA
     public void formTarea() {
