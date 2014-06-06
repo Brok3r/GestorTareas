@@ -1,6 +1,8 @@
+package GestorDeTareas;
 
 
-package gestortareas;
+
+
 
 import Controlador.Controlador;
 import Modelo.Modelo;

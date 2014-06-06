@@ -74,15 +74,20 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="191" max="-2" attributes="0"/>
-                      <Component id="nuevaTarea" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                      <Component id="eliminar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="288" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="287" max="-2" attributes="0"/>
+                      <Component id="nuevaTarea" min="-2" pref="86" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                      <Component id="eliminar" min="-2" pref="101" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="336" max="-2" attributes="0"/>
                       <Component id="actualizar" min="-2" pref="79" max="-2" attributes="0"/>
-                      <EmptySpace pref="544" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="ordenar" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="296" max="32767" attributes="0"/>
                       <Component id="iniciarSesion" min="-2" pref="116" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -90,58 +95,60 @@
                       <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="ordenar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="625" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="253" max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="576" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="332" max="-2" attributes="0"/>
                       <Component id="conectado" min="-2" pref="43" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="conectado" min="-2" pref="41" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="iniciarSesion" min="-2" pref="79" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="eliminar" min="-2" pref="68" max="-2" attributes="0"/>
-                                          <Component id="nuevaTarea" min="-2" max="-2" attributes="0"/>
-                                          <Component id="actualizar" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                                      <Component id="actualizar" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                      <Component id="eliminar" min="-2" pref="77" max="-2" attributes="0"/>
+                                      <Component id="nuevaTarea" min="-2" pref="79" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                              <Component id="jSeparator1" min="-2" pref="11" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
                                   <Group type="102" attributes="0">
-                                      <Component id="jScrollPane1" pref="487" max="32767" attributes="0"/>
-                                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="ordenar" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="ordenar" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                      <Component id="iniciarSesion" min="-2" pref="79" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                      <Component id="jSeparator1" min="-2" pref="11" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="conectado" min="-2" pref="41" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" min="-2" pref="525" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -153,6 +160,7 @@
                   <Image iconType="3" name="/gestortareas/Imagenes/1400377276_User.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Iniciar Sesion"/>
+                <Property name="toolTipText" type="java.lang.String" value="Inicia sesion con tu usuario"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
                 </Property>
@@ -203,13 +211,20 @@
             <Component class="javax.swing.JSeparator" name="jSeparator1">
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+              <Properties>
+                <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[500, 500]"/>
+                </Property>
+              </Properties>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="panel">
+                <Container class="org.edisoncor.gui.panel.Panel" name="panel">
                   <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="cc" green="cc" red="cc" type="rgb"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Linea de Tiempo"/>
+                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                      <Image iconType="3" name="/gestortareas/Imagenes/fondo.jpg"/>
                     </Property>
                   </Properties>
                   <AuxValues>
@@ -219,12 +234,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="602" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="623" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <EmptySpace min="0" pref="493" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="523" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -277,9 +292,10 @@
             <Component class="javax.swing.JComboBox" name="ordenar">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="2">
-                    <StringItem index="0" value="fecha"/>
-                    <StringItem index="1" value="prioridad"/>
+                  <StringArray count="3">
+                    <StringItem index="0" value="Elige"/>
+                    <StringItem index="1" value="fecha"/>
+                    <StringItem index="2" value="prioridad"/>
                   </StringArray>
                 </Property>
               </Properties>
