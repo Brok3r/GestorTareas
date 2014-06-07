@@ -190,11 +190,12 @@ public class Controlador implements ActionListener {
 
             int index = view.ordenar.getSelectedIndex();
             if (index != 0) {
-                model.tareas.setTareas(model.recuperarTareas(view.ordenar.getItemAt(index).toString() + " desc"));
+                              model.tareas.setTareas(model.recuperarTareas(view.ordenar.getItemAt(index).toString() + " desc"));
                 view.mostrarTareas(model.tareas.numeroTareas(), model.tareas.getTareas());
 
             }else
-            añadirListeners(model.recuperarTareas());
+                model.tareas.setTareas(model.recuperarTareas());
+            añadirListeners(model.tareas.getTareas());
 
         }
         if (comando.equals("Eliminar")) {
