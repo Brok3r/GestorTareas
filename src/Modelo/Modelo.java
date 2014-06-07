@@ -16,8 +16,10 @@ public class Modelo extends Conexion {
 
     public Usuario usuario = new Usuario();
     public Tareas tareas = new Tareas();
+    
 
     public Modelo() {
+        tareas.setTareas(recuperarTareas());
     }
 
 //____________________________________________________________________________ 
@@ -52,19 +54,9 @@ public class Modelo extends Conexion {
         instert("TAREAS ", +maxID() + 1 + ",'" + usuario + "','" + titulo + "','" + descripcion + "','" + prioridad + "'," + progreso + ",sysdate");
 
     }
-
-    /**
-     *
-     * @return Entero con el numero de tareas que hay
-     */
-    public int numeroTareas() {
+  public int numeroTareas() {
         Object[][] count = select("TAREAS", "ID", null, null);
         return count.length;
-    }
-    
-    
-     public int numeroTareas(Object[][] tareas) {
-             return tareas.length;
     }
 /**
  * 
@@ -88,7 +80,7 @@ public class Modelo extends Conexion {
  * @return Object[][]
  */
     public Object[][] recuperarTareas(String orderBy) {
-        Object[][] tareas = select("TAREAS", "ID,USUARIO,TITULO,DESCRIPCION,PRIORIDAD,PROGRESO,FECHA ", null, orderBy);
+        Object[][] tareas = select("TAREAS", "ID,USUARIO,TITULO,DESCRIPCION,PRIORIDAD,PROGRESO,FECHA ", null, orderBy );
         return tareas;
 
     }

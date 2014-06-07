@@ -35,30 +35,37 @@ public class Controlador implements ActionListener {
     MouseListener ml = new MouseListener() {
 
         public void mouseClicked(MouseEvent e) {
-            
-            if (!view.nuevaTarea.isEnabled()) { //el boton "eliminar" pone el resto de boton en disable, así controlamos si se ha pulsado el boton elimninar.
-            for (int i = 0; i < view.text.length; i++) {      
-                if (e.getSource().equals(view.text[i])) {
 
-                    int seleccion = JOptionPane.showOptionDialog(null, "¿Desea eliminar esta tarea?", //Mensaje
-                            "Eliminar Tarea", // Título
-                            JOptionPane.YES_NO_CANCEL_OPTION,
-                            JOptionPane.QUESTION_MESSAGE,
-                            null, // null para icono por defecto.
-                            new Object[]{"Si", "No"}, // null para YES, NO y CANCEL
-                            "Si");
-                    if (seleccion == 0) { 
-                        model.delete("tareas ", "id="+view.text[i].getName());
-                        
-                         }
-                        
-           view.nuevaTarea.setEnabled(true);
-            view.actualizar.setEnabled(true);}
-            }
+            if (!view.nuevaTarea.isEnabled()) { //el boton "eliminar" pone el resto de boton en disable, así controlamos si se ha pulsado el boton elimninar.
+                for (int i = 0; i < view.text.length; i++) {
+                    if (e.getSource().equals(view.text[i])) {
+
+                        int seleccion = JOptionPane.showOptionDialog(null, "¿Desea eliminar esta tarea?", //Mensaje
+                                "Eliminar Tarea", // Título
+                                JOptionPane.YES_NO_CANCEL_OPTION,
+                                JOptionPane.QUESTION_MESSAGE,
+                                null, // null para icono por defecto.
+                                new Object[]{"Si", "No"}, // null para YES, NO y CANCEL
+                                "Si");
+                        if (seleccion == 0) {
+                            model.delete("tareas ", "id=" + view.text[i].getName());
+
+                        }
+
+                        view.nuevaTarea.setEnabled(true);
+                        view.actualizar.setEnabled(true);
+                    }
+                }
             }
         }
-        public void mousePressed(MouseEvent e) {  }      @Override
-        public void mouseReleased(MouseEvent e) {}
+
+        public void mousePressed(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
         public void mouseEntered(MouseEvent e) {
             for (int i = 0; i < view.text.length; i++) {
                 if (e.getSource().equals(view.text[i])) {
@@ -66,6 +73,7 @@ public class Controlador implements ActionListener {
                 }
             }
         }
+
         @Override
         public void mouseExited(MouseEvent e) {
             for (int i = 0; i < view.text.length; i++) {
@@ -81,8 +89,7 @@ public class Controlador implements ActionListener {
         this.model = modelo;
         iniciar();
         añadirListeners();
-  
-        
+
     }
     /* INICIA */
 
@@ -94,14 +101,19 @@ public class Controlador implements ActionListener {
         }
         view.setTitle("Gestor de Tareas");
         view.setExtendedState(VentanaInicio.MAXIMIZED_BOTH);
+        //botones activos/inactivos
+        view.nuevaTarea.setEnabled(false);
+        view.cerrarSesion.setEnabled(false);
+
         //Se añade las acciones a los controles del formulario padre
         this.view.iniciarSesion.setActionCommand("Iniciar Sesion");
         view.nuevaTarea.setActionCommand("Nueva Tarea");
-        view.nuevaTarea.setEnabled(false);
+
         view.actualizar.setActionCommand("Actualizar");
         view.eliminar.setActionCommand("Eliminar");
         view.ordenar.setActionCommand("Ordenar");
         view.filtrar.setActionCommand("Filtrar");
+        view.cerrarSesion.setActionCommand("Cerrar Sesion");
         //Se pone a escuchar las acciones del usuario
         view.iniciarSesion.addActionListener(this);
         view.nuevaTarea.addActionListener(this);
@@ -109,6 +121,7 @@ public class Controlador implements ActionListener {
         view.eliminar.addActionListener(this);
         view.ordenar.addActionListener(this);
         view.filtrar.addActionListener(this);
+        view.cerrarSesion.addActionListener(this);
         //Mouese Listener
         view.panel.addMouseListener(ml);
 
@@ -124,32 +137,18 @@ public class Controlador implements ActionListener {
     /* ATENTO A LAS ACCIONES DEL USUARIO */
     public void actionPerformed(ActionEvent e) {
         String comando = e.getActionCommand();
-      
-        if(comando.equals("Filtrar")){
-                
-            
-            view.mostrarTareas(model.numeroTareas(model.recuperarTareas(" usuario='"+model.usuario.getUsuario()+"'", null)),model.recuperarTareas(" usuario='"+model.usuario.getUsuario()+"'", null));
+
+        if (comando.equals("Filtrar")) {
+
+            model.tareas.setTareas(model.recuperarTareas(" usuario='" + model.usuario.getUsuario() + "'", null));
+            view.mostrarTareas(model.tareas.numeroTareas(model.tareas.getTareas()), model.tareas.getTareas());
             añadirListeners();
         }
-        
+
         if (comando.equals("Iniciar Sesion")) {
             formSesion();
-        }
-        if (comando.equals("Actualizar")) {
-            int index=view.ordenar.getSelectedIndex();
-            if(index!=0){
-view.mostrarTareas(model.numeroTareas(), model.recuperarTareas(view.ordenar.getItemAt(index).toString()));
-            }
-            añadirListeners();
-            
-        }
-        if (comando.equals("Eliminar")) {
-            view.nuevaTarea.setEnabled(false);
-            view.actualizar.setEnabled(false);
-            
 
         }
-
         if (comando.equals("Registrar")) {
 
             model.insertarUusario(this.isesion.usuario.getText(), this.isesion.pass.getText());
@@ -158,22 +157,62 @@ view.mostrarTareas(model.numeroTareas(), model.recuperarTareas(view.ordenar.getI
             if (model.loguear(isesion.usuario.getText(), isesion.pass.getText())) {
 
                 isesion.dispose(); //cierra el form
-                view.nuevaTarea.setEnabled(true);
+
                 view.iniciarSesion.setEnabled(false);
+                view.nuevaTarea.setEnabled(true);
+                view.actualizar.setEnabled(true);
+                view.eliminar.setEnabled(true);
+                view.nuevaTarea.setEnabled(true);
+                view.ordenar.setEnabled(true);
+                view.filtrar.setEnabled(true);
+                view.cerrarSesion.setEnabled(true);
+
             } else {
                 JOptionPane.showMessageDialog(null, "Usuario incorrecto, vuelva a intentarlo.", "Usuario incorrecto", JOptionPane.ERROR_MESSAGE);
             }
 
         }
+
+        if (comando.equals("Cerrar Sesion")) {
+            model.usuario.setPass(null);
+            model.usuario.setPass(null);
+            view.nuevaTarea.setEnabled(false);
+            view.actualizar.setEnabled(false);
+            view.eliminar.setEnabled(false);
+            view.nuevaTarea.setEnabled(false);
+            view.ordenar.setEnabled(false);
+            view.filtrar.setEnabled(false);
+            view.iniciarSesion.setEnabled(true);
+            view.cerrarSesion.setEnabled(false);
+
+        }
+        if (comando.equals("Actualizar")) {
+
+            int index = view.ordenar.getSelectedIndex();
+            if (index != 0) {
+                model.tareas.setTareas(model.recuperarTareas(view.ordenar.getItemAt(index).toString() + " desc"));
+                view.mostrarTareas(model.tareas.numeroTareas(), model.tareas.getTareas());
+
+            }else
+            añadirListeners(model.recuperarTareas());
+
+        }
+        if (comando.equals("Eliminar")) {
+            view.nuevaTarea.setEnabled(false);
+            view.actualizar.setEnabled(false);
+            view.filtrar.setEnabled(false);
+            view.cerrarSesion.setEnabled(false);
+
+        }
+
         if (comando.equals("Nueva Tarea")) {
             formTarea();
         }
         {
             if (comando.equals("Aceptar")) {
-              
-                int index = nuevaTarea.prioridad.getSelectedIndex();            
-                
-              
+
+                int index = nuevaTarea.prioridad.getSelectedIndex();
+
                 model.insertarTarea(model.usuario.getUsuario(), nuevaTarea.titulo.getText(),
                         nuevaTarea.descripcion.getText(), nuevaTarea.prioridad.getItemAt(index).toString(), (int) nuevaTarea.progreso.getValue());
 
@@ -236,28 +275,24 @@ view.mostrarTareas(model.numeroTareas(), model.recuperarTareas(view.ordenar.getI
         nuevaTarea.aceptar.addActionListener(this);
         nuevaTarea.cancelar.addActionListener(this);
     }
-    
-    
-    
-    
-    
-    
-    
-    
-        public void añadirListeners(){
-    view.mostrarTareas(model.numeroTareas(), model.recuperarTareas());
-        for (int i = 0; i < view.text.length; i++) {
-            view.text[i].addMouseListener(ml);
-}
-        }
-    
-    
-    public void añadirListeners(Object [][] tareas){
-    view.mostrarTareas(model.numeroTareas(tareas), tareas);
-        for (int i = 0; i < view.text.length; i++) {
-            view.text[i].addMouseListener(ml);
-}
-}
-    
 
+    /**
+     *
+     * Actualiza los listeners teniendo en cuanta las tareas que se estan
+     * manejando en ese moemtno, almacenadas en la clase tarea.
+     */
+    public void añadirListeners() {
+        view.mostrarTareas(model.tareas.numeroTareas(), model.tareas.getTareas());
+        for (int i = 0; i < view.text.length; i++) {
+            view.text[i].addMouseListener(ml);
+        }
+    }
+
+
+    public void añadirListeners(Object[][] tareas) {
+        view.mostrarTareas(model.tareas.numeroTareas(),tareas);
+        for (int i = 0; i < view.text.length; i++) {
+            view.text[i].addMouseListener(ml);
+        }
+    }
 }

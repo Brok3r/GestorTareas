@@ -20,7 +20,7 @@ public class Conexion {
    private String bd ="fbmoll";
    private String login= "alumne";
    private String pass= "alumne";
-   private String url= "jdbc:oracle:thin:@172.16.6.90:1521:"+bd;
+   private String url= "jdbc:oracle:thin:@192.168.1.7:1521:"+bd;
    private Connection con = null;
 //______________________________________________________________________
    
@@ -85,6 +85,7 @@ public   Object[][] select (String tabla, String campos,String where,String orde
         c+=" order by " +  orderBy;
         
     }
+      System.out.println(c);
     try{
        
         PreparedStatement pstm = con.prepareStatement(c2);//preparar objeto stamento 
