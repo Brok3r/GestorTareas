@@ -26,7 +26,7 @@ public class Conexion {
    
    
    
-   
+  
 public Conexion(){
     
     
@@ -85,7 +85,7 @@ public   Object[][] select (String tabla, String campos,String where,String orde
         c+=" order by " +  orderBy;
         
     }
-      System.out.println(c);
+    
     try{
        
         PreparedStatement pstm = con.prepareStatement(c2);//preparar objeto stamento 
@@ -115,7 +115,21 @@ public   Object[][] select (String tabla, String campos,String where,String orde
     return data;
 }
 //_____________________________________________________________________
-
+    public int tiempoTareaSegundos(String id){
+        int tiempo=0;
+        String c= "SELECT (to_char(sysdate,'ddd')*86400 +to_char(sysdate,'hh24')*3600+ to_char(sysdate,'mi')*60+ to_char(sysdate,'ss'))  - (\n" +
+"to_char(fecha,'ddd')*86400 +to_char(fecha,'hh24')*3600+ to_char(fecha,'mi')*60+ to_char(fecha,'ss')) FROM TAREAS WHERE ID='"+id+"'";
+        
+        try{   
+         PreparedStatement pstm = con.prepareStatement(c);//preparar objeto stamento 
+        ResultSet res= pstm.executeQuery(); //ejecutar la consulta
+        res.next(); //Vamos a la siguiente linea
+        tiempo=res.getInt(1);
+        res.close();
+        }catch(SQLException e){System.out.print(e);}
+       return tiempo;
+    }
+            
 
 /**
  *  
@@ -146,10 +160,11 @@ public boolean instert(String tabla,  String valores){
 
 public void Update(String tabla, String valor, String columna, String condicion){
     String u=" UPDATE "+ tabla+
-            " SET " +columna +" = "+valor+
+            " SET " +columna +" = '"+valor+"'"+
             " where " +condicion;
+  System.out.println(u);
     //se ejecuta la consulta
-     try {
+     try {;
            // Se ejecuta la consulta
            PreparedStatement pstm = con.prepareStatement(u);
            pstm.execute();
