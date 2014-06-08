@@ -1,6 +1,8 @@
 package Vista;
 
 import Controlador.Controlador;
+import Modelo.Conexion;
+import Modelo.Tiempo;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.GridLayout;
@@ -21,10 +23,10 @@ import javax.swing.JSeparator;
 
 public class VentanaInicio extends javax.swing.JFrame {
 
-    Border loweredbevel = BorderFactory.createLoweredBevelBorder();
-    Controlador cont = new Controlador();
-       
-  
+   
+ 
+   
+
 
     public VentanaInicio() {
 
@@ -32,99 +34,7 @@ public class VentanaInicio extends javax.swing.JFrame {
     
     }
                             
-    public void mostrarTareas(int numero_tareas, Object[][] tareas) {
-        panel.removeAll();
-        
-        Dimension dimensionTarea = new Dimension();
-        Dimension dimensionProgreso = new Dimension();
-        dimensionProgreso.setSize(200,25);
-        dimensionTarea.setSize(300, 200);
-        Color c=new Color(200, 100,50);
-        Color rojo = new Color(	252,40,30);
-        Color verde = new Color(118,255,122);
-        Color naranja = new Color(255,182,83);
-        
-        text = new JTextPane[numero_tareas];
-        
-        barra = new JProgressBar[numero_tareas];
- 
-        if(numero_tareas<3){
-            panel.setLayout(new GridLayout(3, 1));
-        }else  panel.setLayout(new GridLayout(numero_tareas, 1));
-       
-        for (int i = 0; i < text.length; i++) {
-            text[i] = new JTextPane();
-            barra[i] = new JProgressBar();
-            panel.add(text[i]);
-            text[i].setOpaque(true);
-            barra[i].setSize(dimensionProgreso);
-            barra[i].setLocation(300, 150);
-            text[i].setMaximumSize(dimensionTarea);
-            text[i].setSize(dimensionTarea);
-            text[i].setEditable(false);
-            text[i].setFocusable(true);
-            text[i].setName((String)tareas[i][0]);       
-            text[i].setBorder(loweredbevel);
-            text[i].setContentType("text/html");
-            text[i].add(barra[i]);
-            int progreso=Integer.parseInt((String) tareas[i][5]);
-            barra[i].setString(progreso+"%");
-            barra[i].setValue(progreso);
-            barra[i].setStringPainted(true);
-            if(progreso>=0 & progreso<=25)  {
-                barra[i].setForeground(rojo);}
-            
-            if(progreso>25 & progreso<=75) { 
-                barra[i].setForeground(naranja);}
-
-             if(progreso>75 & progreso<=100) { 
-                 barra[i].setForeground(verde); }
-            barra[i].setVisible(true);
-            text[i].setText(
-                    
-                    ""
-                            + "<!DOCTYPE html>\n" +
-"\n" +
-"<html >\n" +
-"<head>"
-                            + "<style>"
-                            + "p:hover{\n" +
-"	background-color:yellow;" +
-"}"
- + "body:hover{"
-                            + "background-color:#FFFFFF; text-decoration:underline; font-weight:bold"
-  + "}\n" +
-"h1\n" +
-"{\n" +
-"color:orange;\n" +
-"text-align:center;\n" +
-"}\n" +
-"p\n" +
-                            
-"{\n" +
-"font-family:\"Times New Roman\";\n" +
-"font-size:20px;\n" +
-"}</style> </head><body>"
-                            + "<span style=\"color: red; font-size: 25px\">•</span>"
-                            + "  <h1>"+tareas[i][1]+"</h1>"+
-                    "<h2>"+tareas[i][2]+"</h2>"+
-                    "<p>Descripción: "+tareas[i][3]+"</p>"+
-                    "Prioridad: <h3>"+tareas[i][4]+"</h3>"
-                     +"Fecha: "+tareas[i][6]       
-+"</body></html>"
-                    );
-            
-           
-           
-            
-        }
-
-       
-
-        setVisible(true);
-        //mostrarTareas();
-
-    }
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -136,19 +46,25 @@ public class VentanaInicio extends javax.swing.JFrame {
     private void initComponents() {
 
         desktop = new javax.swing.JDesktopPane();
-        panel1 = new org.edisoncor.gui.panel.Panel();
-        iniciarSesion = new javax.swing.JButton();
-        nuevaTarea = new javax.swing.JButton();
+        fondo = new org.edisoncor.gui.panel.Panel();
         conectado = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
         panel = new org.edisoncor.gui.panel.Panel();
-        actualizar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        panel2 = new org.edisoncor.gui.panel.Panel();
+        jLabel2 = new javax.swing.JLabel();
+        panelShadow2 = new org.edisoncor.gui.panel.PanelShadow();
+        jSeparator1 = new javax.swing.JSeparator();
+        cerrarSesion = new javax.swing.JButton();
+        editarTarea = new javax.swing.JButton();
+        nuevaTarea = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
+        filtrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         ordenar = new javax.swing.JComboBox();
-        filtrar = new javax.swing.JButton();
-        cerrarSesion = new javax.swing.JButton();
+        actualizar = new javax.swing.JButton();
+        iniciarSesion = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Gestor de Tareas");
@@ -156,28 +72,10 @@ public class VentanaInicio extends javax.swing.JFrame {
         desktop.setBackground(new java.awt.Color(255, 255, 255));
         desktop.setMaximumSize(new java.awt.Dimension(999999999, 999999999));
 
-        panel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/fondo.jpg"))); // NOI18N
-
-        iniciarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/1400377276_User.png"))); // NOI18N
-        iniciarSesion.setText("Iniciar Sesion");
-        iniciarSesion.setToolTipText("Inicia sesion con tu usuario");
-        iniciarSesion.setBorder(null);
-        iniciarSesion.setBorderPainted(false);
-        iniciarSesion.setContentAreaFilled(false);
-        iniciarSesion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        iniciarSesion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
-        nuevaTarea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/add.png"))); // NOI18N
-        nuevaTarea.setText("Nueva Tarea");
-        nuevaTarea.setToolTipText("Añande nuevas tareas.");
-        nuevaTarea.setBorder(null);
-        nuevaTarea.setBorderPainted(false);
-        nuevaTarea.setContentAreaFilled(false);
-        nuevaTarea.setFocusPainted(false);
-        nuevaTarea.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        nuevaTarea.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/fondo.jpg"))); // NOI18N
 
         conectado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/1400394282_accept-database.png"))); // NOI18N
+        conectado.setToolTipText("Activado cuando la conexión se ha establecido.");
         conectado.setBorder(null);
         conectado.setBorderPainted(false);
         conectado.setContentAreaFilled(false);
@@ -196,11 +94,90 @@ public class VentanaInicio extends javax.swing.JFrame {
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 574, Short.MAX_VALUE)
+            .addGap(0, 589, Short.MAX_VALUE)
         );
 
         jScrollPane1.setViewportView(panel);
 
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane2.setMaximumSize(new java.awt.Dimension(500, 500));
+
+        panel2.setToolTipText("Linea de Tiempo");
+        panel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/fondo.jpg"))); // NOI18N
+
+        javax.swing.GroupLayout panel2Layout = new javax.swing.GroupLayout(panel2);
+        panel2.setLayout(panel2Layout);
+        panel2Layout.setHorizontalGroup(
+            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 712, Short.MAX_VALUE)
+        );
+        panel2Layout.setVerticalGroup(
+            panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 574, Short.MAX_VALUE)
+        );
+
+        jScrollPane2.setViewportView(panel2);
+
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel2.setFont(new java.awt.Font("Bernard MT Condensed", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("En progreso");
+
+        cerrarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        cerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/cerrar sesion.png"))); // NOI18N
+        cerrarSesion.setText("Cerrar Sesion");
+        cerrarSesion.setToolTipText("Cierra la sesion del usuario activo");
+        cerrarSesion.setBorderPainted(false);
+        cerrarSesion.setContentAreaFilled(false);
+        cerrarSesion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cerrarSesion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        editarTarea.setForeground(new java.awt.Color(255, 255, 255));
+        editarTarea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/modificar tarea.png"))); // NOI18N
+        editarTarea.setText("Editar Tarea");
+        editarTarea.setToolTipText("Modifica una tarea haciendo click encima.");
+        editarTarea.setBorderPainted(false);
+        editarTarea.setContentAreaFilled(false);
+        editarTarea.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        editarTarea.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        nuevaTarea.setForeground(new java.awt.Color(255, 255, 255));
+        nuevaTarea.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/add.png"))); // NOI18N
+        nuevaTarea.setText("Nueva Tarea");
+        nuevaTarea.setToolTipText("Añande nuevas tareas.");
+        nuevaTarea.setBorder(null);
+        nuevaTarea.setBorderPainted(false);
+        nuevaTarea.setContentAreaFilled(false);
+        nuevaTarea.setFocusPainted(false);
+        nuevaTarea.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        nuevaTarea.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        eliminar.setForeground(new java.awt.Color(255, 255, 255));
+        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/minus.png"))); // NOI18N
+        eliminar.setText("Eliminar Tarea");
+        eliminar.setToolTipText("Haz click encima de una tarea y eliminala.");
+        eliminar.setBorder(null);
+        eliminar.setBorderPainted(false);
+        eliminar.setContentAreaFilled(false);
+        eliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        eliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        filtrar.setForeground(new java.awt.Color(255, 255, 255));
+        filtrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/buscar por usuario.png"))); // NOI18N
+        filtrar.setText("Filtrar usuario");
+        filtrar.setToolTipText("Muestra solo las tareas creadas por el usuario que ha inicado sesión");
+        filtrar.setBorderPainted(false);
+        filtrar.setContentAreaFilled(false);
+        filtrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        filtrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        filtrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Ordenar por:");
+
+        ordenar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Elige", "fecha", "progreso" }));
+
+        actualizar.setForeground(new java.awt.Color(255, 255, 255));
         actualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/Synchronize.png"))); // NOI18N
         actualizar.setText("Actualizar");
         actualizar.setToolTipText("Actualiza la linea de tiempo de tareas.");
@@ -210,120 +187,136 @@ public class VentanaInicio extends javax.swing.JFrame {
         actualizar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         actualizar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        eliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/minus.png"))); // NOI18N
-        eliminar.setText("Eliminar Tarea");
-        eliminar.setToolTipText("Elimina Tareas.");
-        eliminar.setBorder(null);
-        eliminar.setBorderPainted(false);
-        eliminar.setContentAreaFilled(false);
-        eliminar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        eliminar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        iniciarSesion.setForeground(new java.awt.Color(255, 255, 255));
+        iniciarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/1400377276_User.png"))); // NOI18N
+        iniciarSesion.setText("Iniciar Sesion");
+        iniciarSesion.setToolTipText("Inicia sesion con tu usuario");
+        iniciarSesion.setBorder(null);
+        iniciarSesion.setBorderPainted(false);
+        iniciarSesion.setContentAreaFilled(false);
+        iniciarSesion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        iniciarSesion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
-        jLabel1.setText("Ordenar por:");
-
-        ordenar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Elige", "fecha", "progreso" }));
-
-        filtrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/buscar por usuario.png"))); // NOI18N
-        filtrar.setText("Filtrar usuario");
-        filtrar.setToolTipText("");
-        filtrar.setBorderPainted(false);
-        filtrar.setContentAreaFilled(false);
-        filtrar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        filtrar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        filtrar.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
-        cerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gestortareas/Imagenes/cerrar sesion.png"))); // NOI18N
-        cerrarSesion.setText("Cerrar Sesion");
-        cerrarSesion.setToolTipText("Cierra la sesion del usuario activo");
-        cerrarSesion.setBorderPainted(false);
-        cerrarSesion.setContentAreaFilled(false);
-        cerrarSesion.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        cerrarSesion.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-
-        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
-        panel1.setLayout(panel1Layout);
-        panel1Layout.setHorizontalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addGap(223, 223, 223)
-                .addComponent(cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
-                .addComponent(nuevaTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
-                .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(filtrar)
-                .addGap(45, 45, 45)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(ordenar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
-                .addComponent(actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelShadow2Layout = new javax.swing.GroupLayout(panelShadow2);
+        panelShadow2.setLayout(panelShadow2Layout);
+        panelShadow2Layout.setHorizontalGroup(
+            panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelShadow2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jSeparator1)
-                .addGap(33, 33, 33))
-            .addGroup(panel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75)
-                .addComponent(conectado, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(317, 317, 317))
+                .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 1116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelShadow2Layout.createSequentialGroup()
+                        .addComponent(cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(83, 83, 83)
+                        .addComponent(editarTarea)
+                        .addGap(43, 43, 43)
+                        .addComponent(nuevaTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23)
+                        .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(filtrar)
+                        .addGap(47, 47, 47)
+                        .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(ordenar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
+                        .addComponent(actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        panel1Layout.setVerticalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(actualizar)
-                            .addComponent(filtrar))
-                        .addGap(34, 34, 34))
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
+        panelShadow2Layout.setVerticalGroup(
+            panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelShadow2Layout.createSequentialGroup()
+                .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(editarTarea)
+                            .addComponent(nuevaTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelShadow2Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(filtrar)
+                            .addGroup(panelShadow2Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(ordenar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(nuevaTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(29, 29, 29)))
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(conectado, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41))))
+                                .addComponent(ordenar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panelShadow2Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(panelShadow2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(actualizar)
+                            .addComponent(iniciarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Bernard MT Condensed", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Finalizadas");
+
+        javax.swing.GroupLayout fondoLayout = new javax.swing.GroupLayout(fondo);
+        fondo.setLayout(fondoLayout);
+        fondoLayout.setHorizontalGroup(
+            fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fondoLayout.createSequentialGroup()
+                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, fondoLayout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(fondoLayout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(panelShadow2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(78, Short.MAX_VALUE))
+            .addGroup(fondoLayout.createSequentialGroup()
+                .addGap(381, 381, 381)
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(329, 329, 329))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, fondoLayout.createSequentialGroup()
+                        .addComponent(conectado, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27))))
+        );
+        fondoLayout.setVerticalGroup(
+            fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(fondoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelShadow2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addGap(2, 2, 2)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addGroup(fondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(fondoLayout.createSequentialGroup()
+                        .addGap(530, 530, 530)
+                        .addComponent(conectado, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
         desktop.setLayout(desktopLayout);
         desktopLayout.setHorizontalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         desktopLayout.setVerticalGroup(
             desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(fondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        desktop.setLayer(panel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        desktop.setLayer(fondo, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -381,16 +374,22 @@ public class VentanaInicio extends javax.swing.JFrame {
     public javax.swing.JButton cerrarSesion;
     public javax.swing.JButton conectado;
     public javax.swing.JDesktopPane desktop;
+    public javax.swing.JButton editarTarea;
     public javax.swing.JButton eliminar;
     public javax.swing.JButton filtrar;
+    public org.edisoncor.gui.panel.Panel fondo;
     public javax.swing.JButton iniciarSesion;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     public javax.swing.JButton nuevaTarea;
     public javax.swing.JComboBox ordenar;
     public org.edisoncor.gui.panel.Panel panel;
-    public org.edisoncor.gui.panel.Panel panel1;
+    public org.edisoncor.gui.panel.Panel panel2;
+    private org.edisoncor.gui.panel.PanelShadow panelShadow2;
     // End of variables declaration//GEN-END:variables
     public JTextPane text[];
     public JScrollPane scrollPane;
